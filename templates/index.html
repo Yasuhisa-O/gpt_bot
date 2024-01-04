@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>OpenAI API</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='main.css') }}" />
+  </head>
+  <body>
+
+    <header>
+      <table>
+        <tr>
+          <td width="33%"> </td>
+          <td width="33%" class="centered-text"><h3>OpenAI API</h3></td>
+          <td width="33%" class="right-aligned-text">
+            <a href="/settings" style="display: block; float: right;">API設定画面</a>
+          </td>
+        </tr>
+      </table>
+    </header>
+
+    <form action="/" method="post">
+      <input type="hidden" name="model" id="model" />
+      <input type="hidden" name="key" id="key" />
+      {% if conversation %}
+        <div id="conversation">
+          {{ conversation|safe }}
+        </div>
+      {% endif %}
+      <input type="hidden" id="conversation_so_far" name="conversation_so_far" value="{{ conversation_json }}" />
+      {% with messages = get_flashed_messages(with_categories=True) %}
+      {% if messages %}
+          {% for category, message in messages %}
+          <div class="alert alert-{{ category }}" role="alert">{{ message }}</div>
+          {% endfor %}
+      {% endif %}
+      {% endwith %}
+      <textarea id="user_message" name="user_message" placeholder="Send a message" rows="3" required></textarea>
+      <input type="submit" value="Send" id="send_button" />
+      <p class="centered-text"><small>Click the button above or use Ctrl + Enter keys together to send.</small></p>
+    </form>
+  </body>
+  <script>
+
+    const textarea = document.getElementById('user_message');
+    const button = document.getElementById('send_button');
+
+    textarea.addEventListener('keydown', function(event) {
+      if (event.ctrlKey && event.key === 'Enter') {
+        event.preventDefault();
+        button.click();
+      }
+    });
+
+    document.addEventListener('DOMContentLoaded', function() {
+      const key = localStorage.getItem('key');
+      const model = localStorage.getItem('model');
+      if(key) {
+        const keyElement = document.getElementById('key');
+        keyElement.value = key;
+      }
+      if(model) {
+        const modelElement = document.getElementById('model');
+        modelElement.value = model;
+      }
+
+      const conversation = document.getElementById("conversation");
+      if(conversation && conversation.childNodes.length > 1) {
+        const last_message = conversation.lastElementChild;
+        last_message.scrollIntoView({ block: 'start', behavior: 'auto' });
+      }
+
+    });
+  </script>
+</html>

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>settings</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='main.css') }}" />
+  </head>
+  <body>
+    <h3>Settings</h3>
+    <form method="post">
+      <p>
+        <label for="model">Model: </label><br />
+        <select id="model" name="model">
+          <option value="gpt-4">GPT-4 (smartest)</option>
+          <option value="gpt-3.5-turbo">GPT-3 (fastest & cheapest)</option>
+        </select>
+      </p>
+      <p>
+        <label for="key">API Key: </label>
+        <input type="text" name="key" id="key" style="width: 100%;" /><br />
+        <small><a href="https://platform.openai.com/account/api-keys">Get your key from OpenAI</a></small>
+      </p>
+      <input type="submit" value="Save" id="save_button" onclick="return saveSettings();" />
+    </form>
+  </body>
+  <script>
+    function saveSettings() {
+      const modelElement = document.getElementById('model');
+      const keyElement = document.getElementById('key');
+
+      localStorage.setItem('model', modelElement.options[modelElement.selectedIndex].value);
+      localStorage.setItem('key', keyElement.value);
+
+      location.href = '/'
+
+      return false;
+    }
+
+    function setSelectedItemByValue(selectElement, value) {
+      for (let i = 0; i < selectElement.options.length; i++) {
+        if (selectElement.options[i].value === value) {
+          selectElement.selectedIndex = i;
+          break;
+        }
+      }
+    }
+
+    document.addEventListener('DOMContentLoaded', function() {
+      const key = localStorage.getItem('key');
+      const model = localStorage.getItem('model');
+      if(key) {
+        const keyElement = document.getElementById('key');
+        keyElement.value = key;
+      }
+      if(model) {
+        const modelElement = document.getElementById('model');
+        setSelectedItemByValue(modelElement, model);
+      }
+    });
+
+  </script>
+</html>
