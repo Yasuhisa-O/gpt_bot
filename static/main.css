@@ -46,7 +46,7 @@ input[type="text"] {
 input[type="submit"] {
   padding: 12px 0;
   color: #fff;
-  background-color: #10a37f;
+  background-color: #28a745;
   border: none;
   border-radius: 4px;
   text-align: center;
@@ -59,21 +59,23 @@ input[type="submit"] {
 
 .message_type_user {
     margin-bottom: 10px;
-    background-color: lightgray;
+    background-color: #ffb46e;
     padding: 10px;
+    border-radius: 4px;
 }
 
 .message_type_assistant, .message_type_function {
     margin-bottom: 10px;
-    background-color: #f7f7f8;
+    background-color: #ffdab9;
     padding: 10px;
     font-family: monospace, monospace;
+    border-radius: 4px;
 }
 
 .alert-info, .alert-message, .alert-error {
   color: #0c5460;
   background-color: #d1ecf1;
-  border: solid 1px #b0e0e0;
+  border: solid 1px #dc143c;
   padding: 10px;
   margin-bottom: 7px;
 }

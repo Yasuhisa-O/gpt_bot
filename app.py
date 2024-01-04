@@ -36,16 +36,16 @@ def index():
                 temperature=0.7,
             )
         except openai.error.RateLimitError as e:    # OpenAI is too busy
-            flash('Sorry, the server is overloaded right now. Please try again later.', 'error')
+            flash('現在サーバーが過負荷になっています。後でもう一度試してください…', 'error')
             error_occurred = True
         except openai.error.TryAgain as e:
-            flash('Sorry, the server is overloaded right now. Please try again later.', 'error')
+            flash('現在サーバーが過負荷になっています。後でもう一度試してください…', 'error')
             error_occurred = True
         except openai.error.ServiceUnavailableError as e:
-            flash('Sorry, the server is overloaded right now. Please try again later.', 'error')
+            flash('現在サーバーが過負荷になっています。後でもう一度試してください…', 'error')
             error_occurred = True
         except Exception as e:
-            flash('Sorry, something went wrong. Please try again later', 'error')
+            flash('何か問題が発生しました。後でもう一度お試しください…', 'error')
             error_occurred = True
 
         if not error_occurred:

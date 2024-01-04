@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>settings</title>
+    <title>Settings</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='main.css') }}" />
   </head>
   <body>
-    <h3>Settings</h3>
+    <h3>API設定画面</h3>
     <form method="post">
       <p>
         <label for="model">Model: </label><br />
@@ -16,10 +16,10 @@
       </p>
       <p>
         <label for="key">API Key: </label>
-        <input type="text" name="key" id="key" style="width: 100%;" /><br />
+        <input type="text" name="key" id="key" style="width: 96%;" /><br />
         <small><a href="https://platform.openai.com/account/api-keys">Get your key from OpenAI</a></small>
       </p>
-      <input type="submit" value="Save" id="save_button" onclick="return saveSettings();" />
+      <input type="submit" value="保存" id="save_button" onclick="return saveSettings();" />
     </form>
   </body>
   <script>
